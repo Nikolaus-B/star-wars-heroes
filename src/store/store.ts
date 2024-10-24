@@ -1,9 +1,9 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import heroesReducer from "./heroes/heroesSlice";
+import characterReducer from "./character/characterSlice";
 
 const rootReducer = combineReducers({
-  heroes: heroesReducer,
+  character: characterReducer,
 });
 
 export const store = configureStore({

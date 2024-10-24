@@ -1,4 +1,4 @@
-export interface Heroes {
+export interface Character {
   id: number;
   name: string;
   height: string;
@@ -16,6 +16,6 @@ export interface Heroes {
   url: string;
 }
 
-export interface HeroesState {
-  heroes: Heroes[];
+export interface CharacterState {
+  characters: Character[];
 }

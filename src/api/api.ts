@@ -1,15 +1,15 @@
 import axios from "axios";
 
-const heroesApi = axios.create({
+const characterApi = axios.create({
   baseURL: "https://sw-api.starnavi.io/people",
 });
 
-const episodesApi = axios.create({
+const episodeApi = axios.create({
   baseURL: "https://sw-api.starnavi.io/episodes",
 });
 
-const starshipsApi = axios.create({
+const starshipApi = axios.create({
   baseURL: "https://sw-api.starnavi.io/starships",
 });
 
-export { episodesApi, starshipsApi, heroesApi };
+export { episodeApi, starshipApi, characterApi };

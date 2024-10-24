@@ -1,10 +1,15 @@
-import { fetchHeroes } from "./store/heroes/operations";
+import { AppLayout } from "./components/AppLayout/AppLayout";
+import { fetchCharacters } from "./store/character/operations";
 import { useAppDispatch } from "./store/store";
 
 function App() {
   const dispatch = useAppDispatch();
-  dispatch(fetchHeroes());
-  return <></>;
+  dispatch(fetchCharacters());
+  return (
+    <>
+      <AppLayout />
+    </>
+  );
 }
 
 export default App;

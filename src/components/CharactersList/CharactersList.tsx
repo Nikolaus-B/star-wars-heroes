@@ -5,6 +5,7 @@ import { CharacterCard } from "../CharacterCard/CharacterCard";
 
 export const CharactersList = () => {
   const characters = appSelector(selectCharactersList);
+
   return (
     <section>
       <ul className=" flex gap-20 flex-wrap items-center justify-center mt-20">

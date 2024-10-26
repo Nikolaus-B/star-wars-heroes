@@ -1,9 +1,13 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import characterReducer from "./character/characterSlice";
+import filmReducer from "./film/filmSlice";
+import starshipReducer from "./starship/starshipSlice";
 
 const rootReducer = combineReducers({
   character: characterReducer,
+  film: filmReducer,
+  starShip: starshipReducer,
 });
 
 export const store = configureStore({

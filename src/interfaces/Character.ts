@@ -17,5 +17,6 @@ export interface Character {
 }
 
 export interface CharacterState {
+  selectedCharacter: Character | null;
   characters: Character[];
 }

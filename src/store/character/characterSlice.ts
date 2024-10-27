@@ -11,7 +11,7 @@ const characterSlice = createSlice({
   name: "character",
   initialState,
   reducers: {
-    setSelectedCharacter: (state, action: PayloadAction<Character>) => {
+    setSelectedCharacter: (state, action: PayloadAction<Character | null>) => {
       state.selectedCharacter = action.payload;
     },
   },

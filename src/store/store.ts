@@ -7,7 +7,7 @@ import starshipReducer from "./starship/starshipSlice";
 const rootReducer = combineReducers({
   character: characterReducer,
   film: filmReducer,
-  starShip: starshipReducer,
+  starship: starshipReducer,
 });
 
 export const store = configureStore({

@@ -4,6 +4,7 @@ import {
   Controls,
   useNodesState,
   useEdgesState,
+  Edge,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import { Character } from "../../interfaces/Character";
@@ -15,24 +16,33 @@ import { selectFilmsList } from "../../store/film/filmSelectors";
 // import { selectStarshipList } from "../../store/starship/starshipSelectors";
 import { uid } from "uid";
 import FilmNode from "../Nodes/FilmNode.tsx/FilmNode";
+import { Film } from "../../interfaces/Film";
 
 interface CharacterFlowProps {
   selectedCharacter: Character;
 }
 
+type NodeData = { character?: Character; film?: Film };
+
+type Node = {
+  id: string;
+  position: { x: number; y: number };
+  data: NodeData;
+  type: string;
+};
+
 export default function CharacterFlow({
   selectedCharacter,
 }: CharacterFlowProps) {
-  const initialNodes = [
+  const initialNodes: Node[] = [
     {
       id: "1",
       position: { x: 200, y: 230 },
       data: { character: selectedCharacter },
       type: "characterCard",
     },
-    // { id: "2", position: { x: 0, y: 100 }, data: { film: { title: "nope" } } },
   ];
-  const initialEdges = [];
+  const initialEdges: Edge[] = [];
   const films = appSelector(selectFilmsList);
   // const starships = appSelector(selectStarshipList);
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);

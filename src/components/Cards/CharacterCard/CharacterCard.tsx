@@ -24,7 +24,7 @@ export const CharacterCard = ({ characterInfo }: CharacterCardProps) => {
     dispatch(setSelectedCharacter(characterInfo));
 
     // Fetch films in which the character appears
-    await dispatch(fetchFilmsByIds(characterInfo.films)).then((result) => {
+    await dispatch(fetchFilmsByIds(characterInfo.id)).then((result) => {
       if (fetchFilmsByIds.fulfilled.match(result)) {
         const matchingStarships = findMatchingStarshipIds(
           characterInfo.starships,

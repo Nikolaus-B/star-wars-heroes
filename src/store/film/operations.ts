@@ -6,18 +6,11 @@ import { filmApi } from "../../api/api";
 // Get list of all films by character
 export const fetchFilmsByIds = createAsyncThunk(
   "film/fetchFilmsByIds",
-  async (filmIds: number[], thunkAPI) => {
+  async (characterId: number, thunkAPI) => {
     try {
-      if (!filmIds.length) {
-        return [];
-      }
+      const response = await filmApi.get(`?characters=${characterId}`);
 
-      // Using Promise.all to make parallel requests to the API for each id
-      const responses = await Promise.all(
-        filmIds.map((id) => filmApi.get(`/${id}/`))
-      );
-
-      return responses.map((response) => response.data);
+      return response.data.results;
     } catch (e) {
       return thunkAPI.rejectWithValue((e as Error).message);
     }

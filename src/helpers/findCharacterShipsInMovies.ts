@@ -1,5 +1,5 @@
-import { Film } from "../interfaces/Film";
-import { MatchingStarships } from "../interfaces/Starship";
+import { Film } from "../models/Film";
+import { MatchingStarships } from "../models/Starship";
 
 export default function findMatchingStarshipIds(
   characterStarShipsIds: number[],

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { FilmState } from "../../interfaces/Film";
+import { FilmState } from "../../models/Film";
 import { fetchFilmsByIds } from "./operations";
 
 const initialState: FilmState = {

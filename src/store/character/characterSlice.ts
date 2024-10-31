@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Character, CharacterState } from "../../interfaces/Character";
+import { Character, CharacterState } from "../../models/Character";
 import { fetchCharacters } from "./operations";
 
 const initialState: CharacterState = {

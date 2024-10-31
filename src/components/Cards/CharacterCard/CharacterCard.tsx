@@ -1,4 +1,4 @@
-import { Character } from "../../../interfaces/Character";
+import { Character } from "../../../models/Character";
 import { CharacterCardInfoContainer } from "./CharacterCard.styled";
 import r2d2C3POImage from "../../../assets/images/r2d2-c3po-art.jpg";
 import { DefaultCardTitle } from "../../../styles/componentsStyles/DefaultCardTitle.styled";

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchStarshipDetailsByFilm } from "./operations";
-import { StarshipState } from "../../interfaces/Starship";
+import { StarshipState } from "../../models/Starship";
 
 const initialState: StarshipState = {
   starshipFilmInfo: [],

@@ -1,5 +1,5 @@
 import { NodeProps, Node, Position } from "@xyflow/react";
-import { Character } from "../../../interfaces/Character";
+import { Character } from "../../../models/Character";
 import { CharacterCard } from "../../Cards/CharacterCard/CharacterCard";
 import CustomHandle from "../../../styles/componentsStyles/CustomHandle";
 

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { starshipApi } from "../../api/api";
-import { MatchingStarships } from "../../interfaces/Starship";
+import { MatchingStarships } from "../../models/Starship";
 
 const starshipCache: Record<string, any> = {};
 const pendingRequests: Record<string, Promise<any>> = {};

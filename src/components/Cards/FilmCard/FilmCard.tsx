@@ -3,7 +3,7 @@ import { DefaultCardTitle } from "../../../styles/componentsStyles/DefaultCardTi
 import { BaseCard } from "../../../styles/componentsStyles/BaseCard.styled";
 // import { CardInfoField } from "../../CardInfoField/CardInfoField";
 
-import { Film } from "../../../interfaces/Film";
+import { Film } from "../../../models/Film";
 
 interface FilmCardProps {
   film: Film;
@@ -15,23 +15,6 @@ export const FilmCard = ({ film }: FilmCardProps) => {
   return (
     <BaseCard $backgroundImage={fightImage}>
       <DefaultCardTitle>{title}</DefaultCardTitle>
-      {/* <div>
-        <CardInfoField cardInfoLabel={"Height"} cardInfoValue={height} />
-        <CardInfoField cardInfoLabel={"Mass"} cardInfoValue={mass} />
-        <CardInfoField
-          cardInfoLabel={"Birth year"}
-          cardInfoValue={birth_year}
-        />
-        <CardInfoField cardInfoLabel={"Gender"} cardInfoValue={gender} />
-        <CardInfoField
-          cardInfoLabel={"Hair color"}
-          cardInfoValue={hair_color}
-        />
-        <CardInfoField
-          cardInfoLabel={"Skin color"}
-          cardInfoValue={skin_color}
-        />
-      </div> */}
     </BaseCard>
   );
 };

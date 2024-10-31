@@ -1,4 +1,4 @@
-import { Character } from "../../interfaces/Character";
+import { Character } from "../../models/Character";
 import { selectCharactersList } from "../../store/character/characterSelectors";
 import { appSelector } from "../../store/store";
 import { CharacterCard } from "../Cards/CharacterCard/CharacterCard";

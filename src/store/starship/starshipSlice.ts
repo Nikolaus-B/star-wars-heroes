@@ -3,7 +3,7 @@ import { fetchStarshipDetailsByFilm } from "./operations";
 import { StarshipState } from "../../models/Starship";
 
 const initialState: StarshipState = {
-  starshipFilmInfo: [],
+  characterStarshipsInFilmsInfo: [],
 };
 
 const starshipSlice = createSlice({
@@ -12,7 +12,7 @@ const starshipSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchStarshipDetailsByFilm.fulfilled, (state, action) => {
-      state.starshipFilmInfo = action.payload;
+      state.characterStarshipsInFilmsInfo = action.payload;
     });
   },
 });

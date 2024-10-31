@@ -26,12 +26,12 @@ export interface MatchingStarships {
   starshipIds: number[];
 }
 
-export interface StarshipFilmInfo {
+export interface StarshipsInFilmInfo {
   filmID: number;
   filmTitle: string;
   starships: Starship[];
 }
 
 export interface StarshipState {
-  starshipFilmInfo: StarshipFilmInfo[];
+  characterStarshipsInFilmsInfo: StarshipsInFilmInfo[];
 }

@@ -1,18 +1,20 @@
 import { NodeProps, Node, Position } from "@xyflow/react";
 import CustomHandle from "../../../styles/componentsStyles/CustomHandle";
-import { Starship } from "../../../models/Starship";
+
 import { StarshipCard } from "../../Cards/StarshipCard/StarshipCard";
+import { StarshipNodeType } from "../../../models/NodeTypes";
 
 export type StarshipNodeProps = Node<{
-  starship?: Starship;
+  characterStarshipInFilm?: StarshipNodeType;
 }>;
 
 export default function StarshipNode(props: NodeProps<StarshipNodeProps>) {
   return (
     <div>
       <CustomHandle type="target" position={Position.Left} />
-      {props.data.starship && <StarshipCard starship={props.data.starship} />}
-      <CustomHandle type="source" position={Position.Left} />
+      {props.data.characterStarshipInFilm && (
+        <StarshipCard starship={props.data.characterStarshipInFilm.starship} />
+      )}
     </div>
   );
 }

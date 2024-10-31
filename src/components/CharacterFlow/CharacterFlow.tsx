@@ -15,7 +15,7 @@ import { useEffect } from "react";
 import { nodeTypes } from "../../constants/nodeData";
 import { appSelector, useAppDispatch } from "../../store/store";
 import { selectFilmsList } from "../../store/film/filmSelectors";
-// import { selectStarshipList } from "../../store/starship/starshipSelectors";
+import { selectCharacterStarshipList } from "../../store/starship/starshipSelectors";
 import { setSelectedCharacter } from "../../store/character/characterSlice";
 
 interface CharacterFlowProps {
@@ -36,7 +36,7 @@ export default function CharacterFlow({
   const initialEdges: Edge[] = [];
 
   const films = appSelector(selectFilmsList);
-  // const starships = appSelector(selectStarshipList);
+  const characterStarshipsInFilms = appSelector(selectCharacterStarshipList);
 
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
@@ -45,7 +45,7 @@ export default function CharacterFlow({
 
   useEffect(() => {
     if (films) {
-      const filmsNodes = films.map((film, index) => {
+      const filmNodes = films.map((film, index) => {
         const xPosition = window.innerWidth - 200;
         const yPosition = index * 150;
         return {
@@ -55,18 +55,53 @@ export default function CharacterFlow({
           position: { x: xPosition, y: yPosition },
         };
       });
-      setNodes((prevNodes) => [...prevNodes, ...filmsNodes]);
+      setNodes((prevNodes) => [...prevNodes, ...filmNodes]);
 
       const characterNodeId = "1";
-      const newEdges = filmsNodes.map((filmNode) => ({
+      const newEdges = filmNodes.map((filmNode) => ({
         id: `e${characterNodeId}-${filmNode.id}`,
         source: characterNodeId,
         target: filmNode.id,
       }));
 
+      if (characterStarshipsInFilms) {
+        const uniqueStarshipIds = new Set<number>();
+        const starshipNodes: CustomNode[] = [];
+
+        characterStarshipsInFilms.forEach((characterStarshipsInFilm) => {
+          characterStarshipsInFilm.starships.forEach((starship, index) => {
+            const xPosition = window.innerWidth + 500;
+            const yPosition = index * 200;
+
+            if (!uniqueStarshipIds.has(starship.id)) {
+              uniqueStarshipIds.add(starship.id);
+              starshipNodes.push({
+                id: `${uid()}`,
+                type: "starshipCard",
+                data: {
+                  characterStarshipInFilm: {
+                    starship: starship,
+                    filmId: [characterStarshipsInFilm.filmID],
+                  },
+                },
+                position: { x: xPosition, y: yPosition },
+              });
+              return;
+            }
+            starshipNodes.forEach((starshipNode) => {
+              starshipNode.data.characterStarshipInFilm?.filmId.push(
+                characterStarshipsInFilm.filmID
+              );
+            });
+            return;
+          });
+        });
+
+        setNodes((prevNodes) => [...prevNodes, ...starshipNodes]);
+      }
       setEdges((prevEdges) => [...prevEdges, ...newEdges]);
     }
-  }, [films]);
+  }, [films, characterStarshipsInFilms]);
 
   // const onConnect = useCallback(
   //   (params) => setEdges((eds) => addEdge(params, eds)),

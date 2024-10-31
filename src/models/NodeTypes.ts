@@ -2,13 +2,18 @@ import { Character } from "./Character";
 import { Film } from "./Film";
 import { Starship } from "./Starship";
 
+export interface StarshipNodeType {
+  filmId: number[];
+  starship: Starship;
+}
+
 export type NodesType = {
   character?: Character;
   film?: Film;
-  starship?: Starship;
+  characterStarshipInFilm?: StarshipNodeType;
 };
 
-export type Node = {
+export type CustomNode = {
   id: string;
   position: { x: number; y: number };
   data: NodesType;

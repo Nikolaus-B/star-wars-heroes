@@ -1,4 +1,4 @@
 import { RootState } from "../store";
 
-export const selectStarshipList = (state: RootState) =>
-  state.starship.starshipFilmInfo;
+export const selectCharacterStarshipList = (state: RootState) =>
+  state.starship.characterStarshipsInFilmsInfo;

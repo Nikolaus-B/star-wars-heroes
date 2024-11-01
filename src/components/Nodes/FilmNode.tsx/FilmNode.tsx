@@ -12,7 +12,7 @@ export default function FilmNode(props: NodeProps<FilmNodeProps>) {
     <div>
       <CustomHandle type="target" position={Position.Left} />
       {props.data.film && <FilmCard film={props.data.film} />}
-      <CustomHandle type="source" position={Position.Left} />
+      <CustomHandle type="source" position={Position.Right} />
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { Film } from "./Film";
 import { Starship } from "./Starship";
 
 export interface StarshipNodeType {
-  filmId: number[];
+  filmsId: number[];
   starship: Starship;
 }
 

@@ -6,7 +6,6 @@ import {
   Edge,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import { uid } from "uid";
 
 import { CustomNode } from "../../models/NodeTypes";
 import { Character } from "../../models/Character";
@@ -17,6 +16,14 @@ import { appSelector, useAppDispatch } from "../../store/store";
 import { selectFilmsList } from "../../store/film/filmSelectors";
 import { selectCharacterStarshipList } from "../../store/starship/starshipSelectors";
 import { setSelectedCharacter } from "../../store/character/characterSlice";
+
+import {
+  createFilmEdges,
+  createFilmNodes,
+  createStarshipEdges,
+  createStarshipNodes,
+} from "../../helpers/flowUtils";
+import { selectIsLoading } from "../../store/service/serviceSelectors";
 
 interface CharacterFlowProps {
   selectedCharacter: Character;
@@ -35,73 +42,30 @@ export default function CharacterFlow({
   ];
   const initialEdges: Edge[] = [];
 
+  const dispatch = useAppDispatch();
   const films = appSelector(selectFilmsList);
   const characterStarshipsInFilms = appSelector(selectCharacterStarshipList);
+  const isLoading = appSelector(selectIsLoading);
+
+  const filmNodes = createFilmNodes(films);
+  const starshipNodes = createStarshipNodes(characterStarshipsInFilms);
+
+  const filmEdges = createFilmEdges("1", filmNodes);
+  const srarshipEdges = createStarshipEdges(starshipNodes, filmNodes);
 
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-  const dispatch = useAppDispatch();
+  // const [isInitializedFlow, setIsInitializedFlow] = useState<boolean>(false);
 
   useEffect(() => {
-    if (films) {
-      const filmNodes = films.map((film, index) => {
-        const xPosition = window.innerWidth - 200;
-        const yPosition = index * 150;
-        return {
-          id: `${uid()}`,
-          type: "filmCard",
-          data: { film: film },
-          position: { x: xPosition, y: yPosition },
-        };
-      });
-      setNodes((prevNodes) => [...prevNodes, ...filmNodes]);
+    // if (isLoading && !isInitializedFlow) {
+    setNodes((prevNodes) => [...prevNodes, ...filmNodes, ...starshipNodes]);
+    setEdges((prevEdges) => [...prevEdges, ...filmEdges, ...srarshipEdges]);
 
-      const characterNodeId = "1";
-      const newEdges = filmNodes.map((filmNode) => ({
-        id: `e${characterNodeId}-${filmNode.id}`,
-        source: characterNodeId,
-        target: filmNode.id,
-      }));
-
-      if (characterStarshipsInFilms) {
-        const uniqueStarshipIds = new Set<number>();
-        const starshipNodes: CustomNode[] = [];
-
-        characterStarshipsInFilms.forEach((characterStarshipsInFilm) => {
-          characterStarshipsInFilm.starships.forEach((starship, index) => {
-            const xPosition = window.innerWidth + 500;
-            const yPosition = index * 200;
-
-            if (!uniqueStarshipIds.has(starship.id)) {
-              uniqueStarshipIds.add(starship.id);
-              starshipNodes.push({
-                id: `${uid()}`,
-                type: "starshipCard",
-                data: {
-                  characterStarshipInFilm: {
-                    starship: starship,
-                    filmId: [characterStarshipsInFilm.filmID],
-                  },
-                },
-                position: { x: xPosition, y: yPosition },
-              });
-              return;
-            }
-            starshipNodes.forEach((starshipNode) => {
-              starshipNode.data.characterStarshipInFilm?.filmId.push(
-                characterStarshipsInFilm.filmID
-              );
-            });
-            return;
-          });
-        });
-
-        setNodes((prevNodes) => [...prevNodes, ...starshipNodes]);
-      }
-      setEdges((prevEdges) => [...prevEdges, ...newEdges]);
-    }
-  }, [films, characterStarshipsInFilms]);
+    //   setIsInitializedFlow(true);
+    // }
+  }, [films, characterStarshipsInFilms, isLoading]);
 
   // const onConnect = useCallback(
   //   (params) => setEdges((eds) => addEdge(params, eds)),

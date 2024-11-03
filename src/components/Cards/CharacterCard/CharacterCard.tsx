@@ -9,17 +9,24 @@ import { useAppDispatch } from "../../../store/store";
 import { fetchFilmsByIds } from "../../../store/film/operations";
 import findMatchingStarshipIds from "../../../helpers/findCharacterShipsInMovies";
 import { fetchStarshipDetailsByFilm } from "../../../store/starship/operations";
+import { setStarshipsInFilmsInfo } from "../../../store/starship/starshipSlice";
 
 interface CharacterCardProps {
   characterInfo: Character;
+  isInFlow: boolean;
 }
 
-export const CharacterCard = ({ characterInfo }: CharacterCardProps) => {
+export const CharacterCard = ({
+  characterInfo,
+  isInFlow,
+}: CharacterCardProps) => {
   const { name, height, mass, gender, hair_color, skin_color, birth_year } =
     characterInfo;
   const dispatch = useAppDispatch();
 
   const handleCharacterSelect = async () => {
+    if (isInFlow) return;
+
     // Set the selected character
     dispatch(setSelectedCharacter(characterInfo));
 
@@ -30,6 +37,13 @@ export const CharacterCard = ({ characterInfo }: CharacterCardProps) => {
           characterInfo.starships,
           result.payload
         );
+        console.log("matchingStarships", matchingStarships);
+
+        if (matchingStarships.length === 0) {
+          dispatch(setStarshipsInFilmsInfo([]));
+          return;
+        }
+
         // Dispatch starship details based on matching IDs
         dispatch(fetchStarshipDetailsByFilm(matchingStarships));
       }

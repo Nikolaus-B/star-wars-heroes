@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { FilmState } from "../../models/Film";
 import { fetchFilmsByIds } from "./operations";
+import { createFilmNodes } from "../../helpers/flowUtils";
 
 const initialState: FilmState = {
   films: [],
+  filmNodes: null,
 };
 
 const filmSlice = createSlice({
@@ -13,6 +15,7 @@ const filmSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchFilmsByIds.fulfilled, (state, action) => {
       state.films = action.payload;
+      state.filmNodes = createFilmNodes(action.payload);
     });
   },
 });

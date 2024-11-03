@@ -13,17 +13,11 @@ import { Character } from "../../models/Character";
 import { useEffect } from "react";
 import { nodeTypes } from "../../constants/nodeData";
 import { appSelector, useAppDispatch } from "../../store/store";
-import { selectFilmsList } from "../../store/film/filmSelectors";
-import { selectCharacterStarshipList } from "../../store/starship/starshipSelectors";
+import { selectFilmNodes } from "../../store/film/filmSelectors";
+import { selectStarshipNodes } from "../../store/starship/starshipSelectors";
 import { setSelectedCharacter } from "../../store/character/characterSlice";
 
-import {
-  createFilmEdges,
-  createFilmNodes,
-  createStarshipEdges,
-  createStarshipNodes,
-} from "../../helpers/flowUtils";
-import { selectIsLoading } from "../../store/service/serviceSelectors";
+import { createFilmEdges, createStarshipEdges } from "../../helpers/flowUtils";
 
 interface CharacterFlowProps {
   selectedCharacter: Character;
@@ -43,29 +37,28 @@ export default function CharacterFlow({
   const initialEdges: Edge[] = [];
 
   const dispatch = useAppDispatch();
-  const films = appSelector(selectFilmsList);
-  const characterStarshipsInFilms = appSelector(selectCharacterStarshipList);
-  const isLoading = appSelector(selectIsLoading);
-
-  const filmNodes = createFilmNodes(films);
-  const starshipNodes = createStarshipNodes(characterStarshipsInFilms);
-
-  const filmEdges = createFilmEdges("1", filmNodes);
-  const srarshipEdges = createStarshipEdges(starshipNodes, filmNodes);
+  const filmNodes = appSelector(selectFilmNodes);
+  const starshipNodes = appSelector(selectStarshipNodes);
 
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-  // const [isInitializedFlow, setIsInitializedFlow] = useState<boolean>(false);
-
   useEffect(() => {
-    // if (isLoading && !isInitializedFlow) {
-    setNodes((prevNodes) => [...prevNodes, ...filmNodes, ...starshipNodes]);
-    setEdges((prevEdges) => [...prevEdges, ...filmEdges, ...srarshipEdges]);
+    if (filmNodes) {
+      const filmEdges = createFilmEdges("1", filmNodes);
 
-    //   setIsInitializedFlow(true);
-    // }
-  }, [films, characterStarshipsInFilms, isLoading]);
+      const updatedNodes = [...initialNodes, ...filmNodes];
+
+      if (starshipNodes) {
+        const starshipEdges = createStarshipEdges(starshipNodes, filmNodes);
+        setEdges([...filmEdges, ...starshipEdges]);
+        setNodes([...updatedNodes, ...starshipNodes]);
+      } else {
+        setEdges(filmEdges);
+        setNodes(updatedNodes);
+      }
+    }
+  }, [filmNodes, starshipNodes]);
 
   // const onConnect = useCallback(
   //   (params) => setEdges((eds) => addEdge(params, eds)),

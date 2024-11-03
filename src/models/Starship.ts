@@ -1,3 +1,5 @@
+import { CustomNode } from "./NodeTypes";
+
 export interface Starship {
   id: number;
   name: string;
@@ -34,4 +36,5 @@ export interface StarshipsInFilmInfo {
 
 export interface StarshipState {
   characterStarshipsInFilmsInfo: StarshipsInFilmInfo[];
+  starshipsNodes: CustomNode[] | null;
 }

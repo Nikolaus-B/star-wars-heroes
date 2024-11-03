@@ -6,7 +6,7 @@ import { StarshipsInFilmInfo } from "../models/Starship";
 import { Edge } from "@xyflow/react";
 
 export const createFilmNodes = (films: Film[]) => {
-  if (films.length === 0) return [];
+  if (films.length === 0) return null;
 
   const filmNodes = films.map((film, index) => {
     const xPosition = window.innerWidth - 200;
@@ -40,7 +40,7 @@ export const createFilmEdges = (
 export const createStarshipNodes = (
   characterStarshipsInFilms: StarshipsInFilmInfo[]
 ) => {
-  if (characterStarshipsInFilms.length === 0) return [];
+  if (characterStarshipsInFilms.length === 0) return null;
 
   const uniqueStarshipIds = new Set<number>();
   const starshipNodes: CustomNode[] = [];

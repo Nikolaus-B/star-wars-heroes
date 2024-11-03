@@ -14,6 +14,7 @@ export const CharactersList = () => {
             <CharacterCard
               key={character.id}
               characterInfo={character}
+              isInFlow={false}
             ></CharacterCard>
           );
         })}

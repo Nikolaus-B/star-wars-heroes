@@ -1,3 +1,5 @@
+import { CustomNode } from "./NodeTypes";
+
 export interface Film {
   id: number;
   title: string;
@@ -17,4 +19,5 @@ export interface Film {
 
 export interface FilmState {
   films: Film[];
+  filmNodes: CustomNode[] | null;
 }

@@ -11,7 +11,7 @@ export default function CharacterNode(props: NodeProps<CharacterNodeProps>) {
   return (
     <div>
       {props.data.character && (
-        <CharacterCard characterInfo={props.data.character} />
+        <CharacterCard isInFlow={true} characterInfo={props.data.character} />
       )}
       <CustomHandle type="source" position={Position.Right} />
     </div>

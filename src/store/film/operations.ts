@@ -8,6 +8,8 @@ export const fetchFilmsByIds = createAsyncThunk(
   "film/fetchFilmsByIds",
   async (characterId: number, thunkAPI) => {
     try {
+      if (!characterId) return [];
+
       const response = await filmApi.get(`?characters=${characterId}`);
 
       return response.data.results;

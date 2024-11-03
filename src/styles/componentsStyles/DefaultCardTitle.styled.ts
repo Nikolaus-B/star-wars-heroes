@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const DefaultCardTitle = styled.h3`
-  font-size: 32px;
+  font-size: 22px;
   letter-spacing: 2.56px;
   font-weight: 700;
 

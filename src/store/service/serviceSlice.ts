@@ -35,8 +35,6 @@ const serviceSlice = createSlice({
       (state) => {
         state.isLoading = false;
         state.error = null;
-
-        console.log("state.isLoading", state.isLoading);
       }
     );
     builder.addMatcher(

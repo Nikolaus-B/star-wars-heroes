@@ -10,16 +10,16 @@ export const BaseCard = styled.li<StyledBaseCardProps>`
 
   gap: 24px;
 
-  width: 436px;
-  height: 608px;
+  width: 440px;
+  /* height: 458px; */
 
-  padding: 40px 45px;
+  padding: 35px 40px;
   border-radius: 20px;
 
   background: linear-gradient(
       90deg,
-      rgba(14, 23, 101, 0.85) 0%,
-      rgba(53, 14, 88, 0.85) 98.51%
+      rgba(14, 23, 101, 0.9) 0%,
+      rgba(53, 14, 88, 0.9) 98.51%
     ),
     url(${({ $backgroundImage }) => $backgroundImage}) no-repeat center center;
 

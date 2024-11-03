@@ -1,5 +1,8 @@
 import { Character } from "../../../models/Character";
-import { CharacterCardInfoContainer } from "./CharacterCard.styled";
+import {
+  CharacterCardInfoContainer,
+  TitleAndImageWrapper,
+} from "./CharacterCard.styled";
 import r2d2C3POImage from "../../../assets/images/r2d2-c3po-art.jpg";
 import { DefaultCardTitle } from "../../../styles/componentsStyles/DefaultCardTitle.styled";
 import { BaseCard } from "../../../styles/componentsStyles/BaseCard.styled";
@@ -37,7 +40,6 @@ export const CharacterCard = ({
           characterInfo.starships,
           result.payload
         );
-        console.log("matchingStarships", matchingStarships);
 
         if (matchingStarships.length === 0) {
           dispatch(setStarshipsInFilmsInfo([]));
@@ -55,7 +57,14 @@ export const CharacterCard = ({
       onClick={() => handleCharacterSelect()}
       $backgroundImage={r2d2C3POImage}
     >
-      <DefaultCardTitle>{name ? name : "Hidden in Shadows"}</DefaultCardTitle>
+      <TitleAndImageWrapper>
+        <img
+          className=" w-[140px] h-[160px] rounded-lg"
+          src={`https://starwars-visualguide.com/assets/img/characters/${characterInfo.id}.jpg`}
+          alt={characterInfo.name}
+        />
+        <DefaultCardTitle>{name ? name : "Hidden in Shadows"}</DefaultCardTitle>
+      </TitleAndImageWrapper>
       <CharacterCardInfoContainer>
         <CardInfoField cardInfoLabel={"Height"} cardInfoValue={height} />
         <CardInfoField cardInfoLabel={"Mass"} cardInfoValue={mass} />

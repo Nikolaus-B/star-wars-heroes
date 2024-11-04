@@ -7,7 +7,7 @@ export const CharacterCardInfoContainer = styled.div`
   justify-content: center;
 
   /* gap: 26px; */
-  gap: 26px 90px;
+  gap: 26px 60px;
 
   padding: 20px 25px;
 `;

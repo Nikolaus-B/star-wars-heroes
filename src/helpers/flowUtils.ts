@@ -10,7 +10,7 @@ export const createFilmNodes = (films: Film[]) => {
 
   const filmNodes = films.map((film, index) => {
     const xPosition = window.innerWidth - 200;
-    const yPosition = index * 150;
+    const yPosition = index * 500;
     return {
       id: `${uid()}`,
       type: "filmCard",
@@ -47,8 +47,8 @@ export const createStarshipNodes = (
 
   characterStarshipsInFilms.forEach((characterStarshipsInFilm) => {
     characterStarshipsInFilm.starships.forEach((starship, index) => {
-      const xPosition = window.innerWidth + 500;
-      const yPosition = index * 200;
+      const xPosition = window.innerWidth + 800;
+      const yPosition = index * 340;
 
       if (!uniqueStarshipIds.has(starship.id)) {
         uniqueStarshipIds.add(starship.id);

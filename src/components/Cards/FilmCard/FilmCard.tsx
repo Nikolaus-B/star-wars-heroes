@@ -1,20 +1,34 @@
 import fightImage from "../../../assets/images/star-wars-fight.jpg";
-import { DefaultCardTitle } from "../../../styles/componentsStyles/DefaultCardTitle.styled";
-import { BaseCard } from "../../../styles/componentsStyles/BaseCard.styled";
-// import { CardInfoField } from "../../CardInfoField/CardInfoField";
-
 import { Film } from "../../../models/Film";
+import {
+  FilmContentContainer,
+  FilmDescription,
+  FilmTitle,
+  StyledFilmCard,
+} from "./FilmCard.styled";
 
 interface FilmCardProps {
   film: Film;
 }
 
 export const FilmCard = ({ film }: FilmCardProps) => {
-  const { title } = film;
+  const { title, director, opening_crawl, id } = film;
 
   return (
-    <BaseCard $backgroundImage={fightImage}>
-      <DefaultCardTitle>{title}</DefaultCardTitle>
-    </BaseCard>
+    <StyledFilmCard $backgroundImage={fightImage}>
+      <img
+        className=" h-[470px] rounded-lg"
+        src={`https://starwars-visualguide.com/assets/img/films/${id}.jpg`}
+        alt={title}
+      />
+      <FilmContentContainer>
+        <FilmTitle>{title ? title : "Hidden in Shadows"}</FilmTitle>
+
+        <FilmDescription>
+          <span> Director:</span> {director}
+        </FilmDescription>
+        <FilmDescription>{opening_crawl}</FilmDescription>
+      </FilmContentContainer>
+    </StyledFilmCard>
   );
 };

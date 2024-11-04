@@ -10,7 +10,7 @@ export const BaseCard = styled.li<StyledBaseCardProps>`
 
   gap: 24px;
 
-  width: 440px;
+  width: 410px;
   /* height: 458px; */
 
   padding: 35px 40px;

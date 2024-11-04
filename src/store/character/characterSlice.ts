@@ -17,7 +17,12 @@ const characterSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCharacters.fulfilled, (state, action) => {
-      state.characters = action.payload.results;
+      console.log("action", action.payload);
+      if (action.payload.previous === null) {
+        state.characters = action.payload.results;
+        return;
+      }
+      state.characters = [...state.characters, ...action.payload.results];
     });
   },
 });

@@ -1,4 +1,4 @@
-import { createSlice, isAnyOf } from "@reduxjs/toolkit";
+import { createSlice, isAnyOf, PayloadAction } from "@reduxjs/toolkit";
 import { ServiceState } from "../../models/Service";
 import { fetchFilmsByIds } from "../film/operations";
 import { fetchCharacters } from "../character/operations";
@@ -6,14 +6,19 @@ import { fetchStarshipDetailsByFilm } from "../starship/operations";
 
 const initialState: ServiceState = {
   isLoading: false,
-  currentPage: 1,
   error: null,
+  currentPage: 1,
+  totalPages: 9,
 };
 
 const serviceSlice = createSlice({
   name: "service",
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentPage: (state, action: PayloadAction<number>) => {
+      state.currentPage = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addMatcher(
       isAnyOf(
@@ -51,5 +56,6 @@ const serviceSlice = createSlice({
   },
 });
 
+export const { setCurrentPage } = serviceSlice.actions;
 const serviceReducer = serviceSlice.reducer;
 export default serviceReducer;

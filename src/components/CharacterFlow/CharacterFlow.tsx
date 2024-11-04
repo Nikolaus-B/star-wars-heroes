@@ -18,7 +18,7 @@ import { selectStarshipNodes } from "../../store/starship/starshipSelectors";
 import { setSelectedCharacter } from "../../store/character/characterSlice";
 
 import { createFilmEdges, createStarshipEdges } from "../../helpers/flowUtils";
-
+import lightSabers from "../../assets/images/light-sabers.png";
 interface CharacterFlowProps {
   selectedCharacter: Character;
 }
@@ -75,8 +75,13 @@ export default function CharacterFlow({
         className=" absolute top-10 right-20 z-[1000]"
         onClick={removeSelectedCharacter}
       >
-        X
+        <img
+          className="w-[40px] h-[40px]"
+          src={lightSabers}
+          alt="light sabers"
+        />
       </button>
+
       <ReactFlow
         nodes={nodes}
         edges={edges}

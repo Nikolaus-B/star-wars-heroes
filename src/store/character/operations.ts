@@ -6,9 +6,9 @@ import { characterApi } from "../../api/api";
 // Get list of all characters
 export const fetchCharacters = createAsyncThunk(
   "character/fetchCharacters",
-  async (_, thunkAPI) => {
+  async (page: number, thunkAPI) => {
     try {
-      const response = await characterApi.get(`/`);
+      const response = await characterApi.get(`/?page=${page}`);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue((e as Error).message);

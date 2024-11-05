@@ -5,3 +5,6 @@ export const selectCharactersList = (state: RootState) =>
 
 export const selectSelectedCharacter = (state: RootState) =>
   state.character.selectedCharacter;
+
+export const selectSearchedCharacters = (state: RootState) =>
+  state.character.searchedCharacters;

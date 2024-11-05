@@ -33,6 +33,7 @@ export const fetchCharacterById = createAsyncThunk(
 export const fetchCharacterByName = createAsyncThunk(
   "character/fetchCharacterByName",
   async (name: string, thunkAPI) => {
+    if (name === "") return null;
     try {
       const response = await characterApi.get(`/?search=${name}`);
       return response.data;

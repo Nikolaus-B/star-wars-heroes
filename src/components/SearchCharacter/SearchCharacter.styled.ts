@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const SearchCharacterContainer = styled.div`
   position: relative;
-  width: 596px;
+  max-width: 596px;
 `;
 
 export const SearchCharacterInput = styled.input`
@@ -21,7 +21,11 @@ export const SearchCharacterInput = styled.input`
 
   &:valid ~ span,
   &:focus ~ span {
-    color: #45f3ff;
+    color: linear-gradient(
+      90deg,
+      rgba(75, 100, 202, 1) 0%,
+      rgba(140, 74, 173, 1) 98.51%
+    );
     transform: translateX(-10px) translateY(-34px);
     font-size: 0.75em;
   }
@@ -43,13 +47,37 @@ export const SearchCharacterTitle = styled.span`
   pointer-events: none;
 `;
 
+export const ClearButton = styled.button`
+  position: absolute;
+  right: 10px;
+  top: 55%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  z-index: 20;
+
+  transition: 0.5s;
+  &:hover {
+    color: #45f3ff;
+  }
+`;
+
 export const SearchCharacterUnderline = styled.i`
   position: absolute;
   left: 0;
   bottom: 0;
   width: 100%;
   height: 2px;
-  background: #45f3ff;
+  background: linear-gradient(
+    90deg,
+    rgba(75, 100, 202, 1) 0%,
+    rgba(140, 74, 173, 1) 98.51%
+  );
   border-radius: 4px;
   transition: 0.5s;
   pointer-events: none;

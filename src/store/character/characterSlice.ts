@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Character, CharacterState } from "../../models/Character";
-import { fetchCharacters } from "./operations";
+import { fetchCharacterByName, fetchCharacters } from "./operations";
 
 const initialState: CharacterState = {
   characters: [],
   selectedCharacter: null,
+  searchedCharacters: null,
 };
 
 const characterSlice = createSlice({
@@ -13,16 +14,19 @@ const characterSlice = createSlice({
   reducers: {
     setSelectedCharacter: (state, action: PayloadAction<Character | null>) => {
       state.selectedCharacter = action.payload;
+      state.searchedCharacters = null;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCharacters.fulfilled, (state, action) => {
-      console.log("action", action.payload);
       if (action.payload.previous === null) {
         state.characters = action.payload.results;
         return;
       }
       state.characters = [...state.characters, ...action.payload.results];
+    });
+    builder.addCase(fetchCharacterByName.fulfilled, (state, action) => {
+      state.searchedCharacters = action.payload.results;
     });
   },
 });

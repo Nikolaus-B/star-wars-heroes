@@ -1,15 +1,41 @@
 import { Character } from "../../models/Character";
-import { selectCharactersList } from "../../store/character/characterSelectors";
-import { appSelector } from "../../store/store";
+import {
+  selectCharactersList,
+  selectSearchedCharacters,
+} from "../../store/character/characterSelectors";
+import { fetchCharacters } from "../../store/character/operations";
+import {
+  selectCurrentPage,
+  selectTotalPages,
+} from "../../store/service/serviceSelectors";
+import { setCurrentPage } from "../../store/service/serviceSlice";
+import { appSelector, useAppDispatch } from "../../store/store";
 import { CharacterCard } from "../Cards/CharacterCard/CharacterCard";
+import {
+  MoreCharactersButton,
+  StyledCharacterList,
+} from "./CharactersList.styled";
 
 export const CharactersList = () => {
+  const dispatch = useAppDispatch();
+
+  const totalPages = appSelector(selectTotalPages);
+  const currentPage = appSelector(selectCurrentPage);
+
   const characters = appSelector(selectCharactersList);
+  const searchedCharacters = appSelector(selectSearchedCharacters);
+
+  const handleAddCharacters = () => {
+    if (currentPage < totalPages) {
+      dispatch(fetchCharacters(currentPage + 1));
+      dispatch(setCurrentPage(currentPage + 1));
+    }
+  };
 
   return (
-    <div>
-      <ul className=" flex gap-20 flex-wrap items-start justify-start mt-20">
-        {characters.map((character: Character) => {
+    <div className="flex flex-col gap-5">
+      <StyledCharacterList>
+        {(searchedCharacters || characters).map((character: Character) => {
           return (
             <CharacterCard
               key={character.id}
@@ -18,7 +44,15 @@ export const CharactersList = () => {
             ></CharacterCard>
           );
         })}
-      </ul>
+      </StyledCharacterList>
+      {!searchedCharacters && (
+        <MoreCharactersButton
+          onClick={handleAddCharacters}
+          disabled={currentPage === totalPages}
+        >
+          More
+        </MoreCharactersButton>
+      )}
     </div>
   );
 };

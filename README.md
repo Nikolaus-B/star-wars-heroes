@@ -1,50 +1,34 @@
-# React + TypeScript + Vite
+# Star Wars Character Explorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project allows users to interact with the Star Wars universe through an API and a user-friendly interface. The application enables users to browse characters and explore their connections to movies and starships through an interactive flow map.
 
-Currently, two official plugins are available:
+## Technologies Used
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React**: For building the user interface.
+- **TypeScript**: For type safety and better developer experience.
+- **Redux Toolkit**: For state management.
+- **Styled-Components**: For styling the components using tagged template literals.
+- **Tailwind CSS**: For utility-first styling approach.
+- **React Flow**: For creating and displaying the interactive flow map.
+- **Vite**: As the build tool for fast development and optimized production builds.
 
-## Expanding the ESLint configuration
+## API
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The application fetches data from the [Star Wars API](https://sw-api.starnavi.io/), which provides information about characters, movies, and starships.
 
-- Configure the top-level `parserOptions` property like this:
+## Main Features
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **Character List**: Display a list of characters retrieved from the API.
+- **Interactive Flow Map**:
+  - Clicking on a character opens a React Flow map.
+  - The main node represents the selected character.
+  - From the character node, connections lead to the movies in which the character appears.
+  - Each movie node has connections to the starships that the character traveled on.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+> [!TIP]
+> Getting Started:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- Clone this repository to your local machine.
+- Install dependencies using npm install.
+- Run the development server with npm run dev.
+- Access the application in your browser at http://localhost:5173

@@ -26,6 +26,10 @@ const characterSlice = createSlice({
       state.characters = [...state.characters, ...action.payload.results];
     });
     builder.addCase(fetchCharacterByName.fulfilled, (state, action) => {
+      if (action.payload === null) {
+        state.searchedCharacters = null;
+        return;
+      }
       state.searchedCharacters = action.payload.results;
     });
   },
